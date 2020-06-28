@@ -16,7 +16,7 @@ RUN mkdir ~/.pip && \
     echo -e '[global]\n'\
 'index-url=http://mirror.kakao.com/pypi/simple/\n'\
 'trusted-host=mirror.kakao.com\n'\
-'progress-bar=emoji # [off|on|ascii|pretty|emoji]'\
+'progress-bar=emoji\
         > ~/.pip/pip.conf
 
 LABEL maintainer="LIM HYUN SEOK <contact@loopback.kr>"
