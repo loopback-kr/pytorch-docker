@@ -19,4 +19,4 @@ RUN mkdir ~/.pip && \
 'progress-bar=emoji # [off|on|ascii|pretty|emoji]'\
         > ~/.pip/pip.conf
 
-LABEL LIM HYUN SEOK <contact@loopback.kr>
+LABEL maintainer=LIM HYUN SEOK <contact@loopback.kr>
