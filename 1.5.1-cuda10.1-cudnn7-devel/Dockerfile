@@ -13,10 +13,10 @@ RUN apt update && \
 
 # Configure default Pypi repository address and default progress bar style
 RUN mkdir ~/.pip && \
-    echo -e '[global]\n'\
-'index-url=http://mirror.kakao.com/pypi/simple/\n'\
-'trusted-host=mirror.kakao.com\n'\
-'progress-bar=emoji'\
+    echo -e "[global]\n"\
+"index-url=http://mirror.kakao.com/pypi/simple/\n"\
+"trusted-host=mirror.kakao.com\n"\
+"progress-bar=emoji"\
         > ~/.pip/pip.conf
 
 LABEL maintainer="LIM HYUN SEOK <contact@loopback.kr>"
