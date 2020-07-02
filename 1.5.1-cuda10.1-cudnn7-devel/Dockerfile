@@ -20,8 +20,9 @@ RUN mkdir ~/.pip && \
 'index-url=http://mirror.kakao.com/pypi/simple/\n'\
 'trusted-host=mirror.kakao.com\n'\
 'progress-bar=emoji'\
-        > ~/.pip/pip.conf && \
-    pip install --upgrade pip
+        > ~/.pip/pip.conf
+
+RUN pip install --upgrade pip
 
 # Describe information
 LABEL maintainer="LIM HYUN SEOK <contact@loopback.kr>"
