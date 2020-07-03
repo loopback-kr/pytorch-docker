@@ -23,4 +23,9 @@ RUN mkdir ~/.pip && \
         > ~/.pip/pip.conf && \
     pip install --upgrade pip
 
+# Add alias
+RUN alias l="ls -alh --full-time" && \
+    alias cls='clear'
+
+# Write maintainer information
 LABEL maintainer="LIM HYUN SEOK <contact@loopback.kr>"
