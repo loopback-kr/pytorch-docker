@@ -14,7 +14,9 @@ RUN apt update && \
         tree \
         wget \
         zip \
-        unzip
+        unzip \
+        libglu1-mesa-dev \
+        libglib2.0-0
 
 # Configure default Pypi repository address and default progress bar style
 RUN mkdir ~/.pip && \
