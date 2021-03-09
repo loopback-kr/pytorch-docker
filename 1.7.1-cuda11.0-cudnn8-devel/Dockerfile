@@ -32,5 +32,8 @@ RUN mkdir ~/.pip && \
 RUN alias l="ls -alh --full-time" && \
     alias cls='clear'
 
+# Delete unnecessary data
+RUN rm -rf /var/lib/apt/lists/*
+
 # Write maintainer information
 LABEL maintainer="LIM HYUN SEOK <contact@loopback.kr>"
