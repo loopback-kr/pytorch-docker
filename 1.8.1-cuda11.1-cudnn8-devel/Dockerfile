@@ -8,7 +8,7 @@ SHELL ["/bin/bash", "-c"]
 # Set Timezone
 ENV TZ=Asia/Seoul
 # Set X Server remote address
-ENV DISPLAY=dev.amilab.dev:0
+ENV DISPLAY=dev.loopback.kr:0
 # Set python encoding type
 ENV PYTHONIOENCODING=UTF-8
 

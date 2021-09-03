@@ -6,7 +6,7 @@ SHELL ["/bin/bash", "-c"]
 # Set python encoding type
 ENV PYTHONIOENCODING=UTF-8
 # Set X Server address
-ENV DISPLAY=dev.amilab.dev:0
+ENV DISPLAY=dev.loopback.kr:0
 
 # Change Ubuntu repository address to DaumKaKao
 RUN sed -i 's/archive.ubuntu.com/mirror.loopback.kr/g' /etc/apt/sources.list
