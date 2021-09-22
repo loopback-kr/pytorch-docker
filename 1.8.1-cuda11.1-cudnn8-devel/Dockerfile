@@ -42,7 +42,7 @@ RUN apt update \
     && rm -rf /var/lib/apt/lists/*
 
 # Configure default Pypi repository address and default progress bar style
-RUN mkdir ~/.pip \
+RUN mkdir -p ~/.config/pip \
     && echo -e \
 "[global]\n"\
 "index-url=https://mirror.loopback.kr/pypi/simple/\n"\
