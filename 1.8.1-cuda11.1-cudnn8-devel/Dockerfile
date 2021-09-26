@@ -12,6 +12,10 @@ ENV TZ=Asia/Seoul
 ENV DISPLAY=dev.loopback.kr:0
 # Set python encoding type
 ENV PYTHONIOENCODING=UTF-8
+# Add Bash Alias
+RUN alias l="ls -alh --full-time" \
+    && alias cls='clear' \
+    && alias pip='pip3'
 
 
 ### Change settings
@@ -32,6 +36,7 @@ RUN sed -i 's/http:\/\/extras.ubuntu.com/https:\/\/mirror.loopback.kr/g' /etc/ap
 RUN apt update \
     && apt install -y \
         tzdata \
+        python3.8
         git \
         libglu1-mesa-dev \
         libglib2.0-0 \
@@ -40,6 +45,8 @@ RUN apt update \
         libxrender-dev \
     && apt clean \
     && rm -rf /var/lib/apt/lists/*
+RUN alias python3='python3.8' \
+    && alias python='python3.8'
 
 # Configure default Pypi repository address and default progress bar style
 RUN mkdir -p ~/.config/pip \
