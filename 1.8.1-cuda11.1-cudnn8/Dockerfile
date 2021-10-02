@@ -1,8 +1,5 @@
 FROM pytorch/pytorch:1.8.1-cuda11.1-cudnn8-devel
 
-# Change default Shell to bash
-SHELL ["/bin/bash", "-c"]
-
 
 ### Set environment variables
 # Set Timezone
@@ -23,26 +20,27 @@ ENV BEEP_MARIO='-f 130 -l 100 -n -f 262 -l 100 -n -f 330 -l 100 -n -f 392 -l 100
 RUN sed -i 's/    xterm-color) color_prompt=yes;;/    #xterm-color) color_prompt=yes;;\n    xterm-color|*-256color) color_prompt=yes;;/' /root/.bashrc
 # Change original green color of bash shell prompt to red color
 RUN sed -i 's/    PS1=\x27${debian_chroot:+(\$debian_chroot)}\\\[\\033\[01;32m\\\]\\u@\\h\\\[\\033\[00m\\\]:\\\[\\033\[01;34m\\\]\\w\\\[\\033\[00m\\\]\\\$ \x27/    PS1=\x27\${debian_chroot:+(\$debian_chroot)}\\\[\\033\[01;31m\\\]\\u@\\h\\\[\\033\[00m\\\]:\\\[\\033\[01;34m\\\]\\w\\\[\\033\[00m\\\]\\\$ \x27/' /root/.bashrc
-# Change Ubuntu repository address to Kakao server
-RUN sed -i 's/http:\/\/archive.ubuntu.com/https:\/\/mirror.loopback.kr/g' /etc/apt/sources.list
-RUN sed -i 's/http:\/\/security.ubuntu.com/https:\/\/mirror.loopback.kr/g' /etc/apt/sources.list
-RUN sed -i 's/http:\/\/extras.ubuntu.com/https:\/\/mirror.loopback.kr/g' /etc/apt/sources.list
-
-
-### Install additional packages
 # Install essential packages
 RUN apt update \
     && apt install -y \
         tzdata \
         beep \
         git \
+        ca-certificates
+# Change Ubuntu repository address to Kakao server in Republic of Korea
+RUN sed -i 's/^deb http:\/\/archive.ubuntu.com/deb https:\/\/mirror.loopback.kr/g' /etc/apt/sources.list
+RUN sed -i 's/^deb http:\/\/security.ubuntu.com/deb https:\/\/mirror.loopback.kr/g' /etc/apt/sources.list
+
+
+### Setup requirements
+# Install pytorch requirements
+RUN apt update \
+    && apt install -y \
         libglu1-mesa-dev \
         libglib2.0-0 \
         libsm6 \
         libxext6 \
-        libxrender-dev \
-    && apt clean \
-    && rm -rf /var/lib/apt/lists/*
+        libxrender-dev
 
 # Configure default Pypi repository address and default progress bar style
 RUN mkdir -p ~/.config/pip \
@@ -50,13 +48,20 @@ RUN mkdir -p ~/.config/pip \
 "[global]\n"\
 "index-url=https://mirror.loopback.kr/pypi/simple/\n"\
 "trusted-host=mirror.loopback.kr\n"\
-"progress-bar=on"\
+"progress-bar=emoji"\
         > ~/.config/pip/pip.conf \
     && pip install -U pip \
     && pip install torchvision==0.9.1
 
-WORKDIR /root/workspace
-
-# Add Bash Alias
+### Postprocessing & Cleaning
+# Add Bash alias
 RUN echo 'alias l="ls -alh --full-time"' >> ~/.bashrc
 RUN echo 'alias cls="clear"' >> ~/.bashrc
+RUN echo 'alias python=python3' >> ~/.bashrc
+RUN echo 'alias pip=pip3' >> ~/.bashrc
+# Clean the cache
+RUN apt clean \
+    && rm -rf /var/lib/apt/lists/* \
+    && pip3 cache purge
+# Set workspace
+WORKDIR /root/workspace
