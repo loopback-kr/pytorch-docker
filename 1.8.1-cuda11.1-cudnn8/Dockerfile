@@ -2,6 +2,8 @@ FROM pytorch/pytorch:1.8.1-cuda11.1-cudnn8-devel
 
 
 ### Set environment variables
+# Change default Shell to bash
+SHELL ["/bin/bash", "-c"]
 # Set Timezone
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=Asia/Seoul
