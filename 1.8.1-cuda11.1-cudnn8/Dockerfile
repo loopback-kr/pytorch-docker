@@ -7,8 +7,6 @@ SHELL ["/bin/bash", "-c"]
 # Set Timezone
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=Asia/Seoul
-# Set X Server remote address
-ENV DISPLAY=dev.loopback.kr:0
 # Set python encoding type
 ENV PYTHONIOENCODING=UTF-8
 # Set Beep theme
@@ -30,8 +28,8 @@ RUN apt update \
         git \
         ca-certificates
 # Change Ubuntu repository address to Kakao server in Republic of Korea
-RUN sed -i 's/^deb http:\/\/archive.ubuntu.com/deb https:\/\/mirror.loopback.kr/g' /etc/apt/sources.list
-RUN sed -i 's/^deb http:\/\/security.ubuntu.com/deb https:\/\/mirror.loopback.kr/g' /etc/apt/sources.list
+RUN sed -i 's/^deb http:\/\/archive.ubuntu.com/deb https:\/\/mirror.kakao.com/g' /etc/apt/sources.list
+RUN sed -i 's/^deb http:\/\/security.ubuntu.com/deb https:\/\/mirror.kakao.com/g' /etc/apt/sources.list
 
 
 ### Setup requirements
@@ -48,9 +46,8 @@ RUN apt update \
 RUN mkdir -p ~/.config/pip \
     && echo -e \
 "[global]\n"\
-"index-url=https://mirror.loopback.kr/pypi/simple/\n"\
-"trusted-host=mirror.loopback.kr\n"\
-"progress-bar=emoji"\
+"index-url=https://mirror.kakao.com/pypi/simple/\n"\
+"trusted-host=mirror.kakao.com\n"\
         > ~/.config/pip/pip.conf \
     && pip install -U pip \
     && pip install torchvision==0.9.1
