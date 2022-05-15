@@ -64,12 +64,12 @@ RUN echo 'alias python=python3' >> ~/.bashrc
 RUN echo 'alias pip=pip3' >> ~/.bashrc
 
 # Welcome message
-RUN echo -e '\x1b[0;91m________        ________                  ______      FROM\n___  __ \\____  ____  __/_____________________  /_        RESEARCH TO\n__  /_/ /_  / / /_  /  _  __ \\_  ___/  ___/_  __ \\    PRODUCTION\n_  ____/_  /_/ /_  /   / /_/ /  /   / /__ _  / / /\n/_/     _\\__, / /_/    \\____//_/    \\___/ /_/ /_/     An open source machine learning framework that accelerates the path from\n        /____/                                        research prototyping to production deployment.\n'
-RUN echo -e '\x1b[0;33mUbuntu\t'$(sed -n '/VERSION=/p' /etc/os-release | cut -c 9-)
-RUN echo -e '\x1b[0;33mPython \tV'$(python -c 'import sys; print(".".join([str(i) for i in sys.version_info[:]]))')
-RUN echo -e '\x1b[0;33mPIP \t'$(pip -V)
-RUN echo -e '\t'$(sed -n '/index-url/p' ~/.config/pip/pip.conf)
-RUN echo -e '\x1b[0;33mPyTorch\tV1.8.1-cuda11.1-cudnn8-devel\x1b[0m\n'
+RUN echo -e '\x1b[0;91m________        ________                  ______      FROM\n___  __ \\____  ____  __/_____________________  /_        RESEARCH TO\n__  /_/ /_  / / /_  /  _  __ \\_  ___/  ___/_  __ \\    PRODUCTION\n_  ____/_  /_/ /_  /   / /_/ /  /   / /__ _  / / /\n/_/     _\\__, / /_/    \\____//_/    \\___/ /_/ /_/     An open source machine learning framework that accelerates the path from\n        /____/                                        research prototyping to production deployment.\n' >> ~/.bashrc
+RUN echo -e '\x1b[0;33mUbuntu\t'$(sed -n '/VERSION=/p' /etc/os-release | cut -c 9-) >> ~/.bashrc
+RUN echo -e '\x1b[0;33mPython \tV'$(python -c 'import sys; print(".".join([str(i) for i in sys.version_info[:]]))') >> ~/.bashrc
+RUN echo -e '\x1b[0;33mPIP \t'$(pip -V) >> ~/.bashrc
+RUN echo -e '\t'$(sed -n '/index-url/p' ~/.config/pip/pip.conf) >> ~/.bashrc
+RUN echo -e '\x1b[0;33mPyTorch\tV1.8.1-cuda11.1-cudnn8-devel\x1b[0m\n' >> ~/.bashrc
 
 # Clean the cache
 RUN apt clean \
