@@ -72,8 +72,7 @@ RUN echo "echo -e '\t'\$(sed -n '/index-url/p' ~/.config/pip/pip.conf)" >> ~/.ba
 RUN echo "echo -e '\x1b[0;33mPyTorch\t1.8.1-cuda11.1-cudnn8-devel\x1b[0m'" >> ~/.bashrc
 RUN echo "if command -v nvidia-smi &> /dev/null" >> ~/.bashrc
 RUN echo "then" >> ~/.bashrc
-RUN echo "    echo -e '\x1b[0;32m' && nvidia-smi -L" >> ~/.bashrc
-RUN echo "    echo -e '\x1b[0m' && exit" >> ~/.bashrc
+RUN echo "    echo -e '\x1b[0;32m' && nvidia-smi -L && echo -e '\x1b[0m'" >> ~/.bashrc
 RUN echo "fi" >> ~/.bashrc
 
 # Clean the cache
