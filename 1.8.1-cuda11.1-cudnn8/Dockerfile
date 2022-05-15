@@ -65,11 +65,16 @@ RUN echo 'alias pip=pip3' >> ~/.bashrc
 
 # Welcome message
 RUN echo "echo -e '\x1b[0;91m________        ________                  ______      FROM\n___  __ \\____  ____  __/_____________________  /_        RESEARCH TO\n__  /_/ /_  / / /_  /  _  __ \\_  ___/  ___/_  __ \\    PRODUCTION\n_  ____/_  /_/ /_  /   / /_/ /  /   / /__ _  / / /\n/_/     _\\__, / /_/    \\____//_/    \\___/ /_/ /_/     An open source machine learning framework that accelerates the path from\n        /____/                                        research prototyping to production deployment.\n'" >> ~/.bashrc
-RUN echo "echo -e '\x1b[0;33mUbuntu\t'$(sed -n '/VERSION=/p' /etc/os-release | cut -c 9-)" >> ~/.bashrc
-RUN echo "echo -e '\x1b[0;33mPython \tV'$(python -c 'import sys; print(".".join([str(i) for i in sys.version_info[:]]))')" >> ~/.bashrc
-RUN echo "echo -e '\x1b[0;33mPIP \t'$(pip -V | cut -d '(' -f 1)" >> ~/.bashrc
-RUN echo "echo -e '\t'$(sed -n '/index-url/p' ~/.config/pip/pip.conf)" >> ~/.bashrc
-RUN echo "echo -e '\x1b[0;33mPyTorch\tV1.8.1-cuda11.1-cudnn8-devel\x1b[0m\n'" >> ~/.bashrc
+RUN echo "echo -e '\x1b[0;33mUbuntu\t'\$(sed -n '/VERSION=/p' /etc/os-release | cut -d '\"' -f 2)" >> ~/.bashrc
+RUN echo "echo -e '\x1b[0;33mPython \t'\$(python -V | cut -d ' ' -f 2)" >> ~/.bashrc
+RUN echo "echo -e '\x1b[0;33mPIP \t'\$(pip -V | cut -d '(' -f 1 | cut -d ' ' -f 2-)" >> ~/.bashrc
+RUN echo "echo -e '\t'\$(sed -n '/index-url/p' ~/.config/pip/pip.conf)" >> ~/.bashrc
+RUN echo "echo -e '\x1b[0;33mPyTorch\t1.8.1-cuda11.1-cudnn8-devel\x1b[0m'" >> ~/.bashrc
+RUN echo "if command -v nvidia-smi &> /dev/null" >> ~/.bashrc
+RUN echo "then" >> ~/.bashrc
+RUN echo "    echo -e '\x1b[0;32m' && nvidia-smi -L" >> ~/.bashrc
+RUN echo "    echo -e '\x1b[0m' && exit" >> ~/.bashrc
+RUN echo "fi" >> ~/.bashrc
 
 # Clean the cache
 RUN apt clean \
