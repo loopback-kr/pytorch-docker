@@ -66,12 +66,15 @@ RUN echo 'alias pip=pip3' >> ~/.bashrc
 # Welcome message
 RUN echo "echo -e '\x1b[0;91m________        ________                  ______      FROM\n___  __ \\____  ____  __/_____________________  /_        RESEARCH TO\n__  /_/ /_  / / /_  /  _  __ \\_  ___/  ___/_  __ \\    PRODUCTION\n_  ____/_  /_/ /_  /   / /_/ /  /   / /__ _  / / /\n/_/     _\\__, / /_/    \\____//_/    \\___/ /_/ /_/     An open source machine learning framework that accelerates the path from\n        /____/                                        research prototyping to production deployment.\n'" >> ~/.bashrc
 RUN echo "echo -e '\x1b[0;33mUbuntu\t'\$(sed -n '/VERSION=/p' /etc/os-release | cut -d '\"' -f 2)" >> ~/.bashrc
-RUN echo "echo -e '\x1b[0;33mPython \t'\$(python -V | cut -d ' ' -f 2)" >> ~/.bashrc
-RUN echo "echo -e '\x1b[0;33mPIP \t'\$(pip -V | cut -d '(' -f 1 | cut -d ' ' -f 2-)" >> ~/.bashrc
+RUN echo "echo -e 'Python \t'\$(python -V | cut -d ' ' -f 2)" >> ~/.bashrc
+RUN echo "echo -e 'PIP \t'\$(pip -V | cut -d '(' -f 1 | cut -d ' ' -f 2-)" >> ~/.bashrc
 RUN echo "echo -e '\t'\$(sed -n '/index-url/p' ~/.config/pip/pip.conf)" >> ~/.bashrc
-RUN echo "echo -e '\x1b[0;33mPyTorch\t1.8.1-cuda11.1-cudnn8-devel\x1b[0m'" >> ~/.bashrc
+RUN echo "echo -e -n 'PyTorch' && echo \$(pip freeze | grep torch) | sed 's/torch//' | sed 's/ /\n\t/g' | sed 's/==/ /g'" >> ~/.bashrc
+
 RUN echo "if command -v nvidia-smi &> /dev/null" >> ~/.bashrc
 RUN echo "then" >> ~/.bashrc
+RUN echo "    echo -e -n 'CUDA\t' && echo -e \$(nvcc -V) | grep 'Cuda compilation tools' | cut -d ',' -f 3 | sed 's/ V//g' | cut -d ' ' -f 1" >> ~/.bashrc
+RUN echo "    echo -e '\tcuDNN '\$(grep '#define CUDNN_' /usr/include/cudnn_version.h | cut -d ' ' -f 3 | sed -z 's/\n//' | sed -z 's/\n/./g') | sed 's/.(CUDNN_MAJOR.//'" >> ~/.bashrc
 RUN echo "    echo -e '\x1b[0;32m' && nvidia-smi -L && echo -e '\x1b[0m'" >> ~/.bashrc
 RUN echo "fi" >> ~/.bashrc
 
