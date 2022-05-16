@@ -70,12 +70,15 @@ RUN echo "echo -e 'Python \t'\$(python -V | cut -d ' ' -f 2)" >> ~/.bashrc
 RUN echo "echo -e 'PIP \t'\$(pip -V | cut -d '(' -f 1 | cut -d ' ' -f 2-)" >> ~/.bashrc
 RUN echo "echo -e '\t'\$(sed -n '/index-url/p' ~/.config/pip/pip.conf)" >> ~/.bashrc
 RUN echo "echo -e -n 'PyTorch' && echo \$(pip freeze | grep torch) | sed 's/torch//' | sed 's/ /\n\t/g' | sed 's/==/ /g'" >> ~/.bashrc
+RUN echo "echo -n -e '\x1b[0m'" >> ~/.bashrc
 
 RUN echo "if command -v nvidia-smi &> /dev/null" >> ~/.bashrc
 RUN echo "then" >> ~/.bashrc
-RUN echo "    echo -e -n 'CUDA\t' && echo -e \$(nvcc -V) | grep 'Cuda compilation tools' | cut -d ',' -f 3 | sed 's/ V//g' | cut -d ' ' -f 1" >> ~/.bashrc
+RUN echo "    echo -e -n '\x1b[0;33mCUDA\t' && echo -e \$(nvcc -V) | grep 'Cuda compilation tools' | cut -d ',' -f 3 | sed 's/ V//g' | cut -d ' ' -f 1" >> ~/.bashrc
 RUN echo "    echo -e '\tcuDNN '\$(grep '#define CUDNN_' /usr/include/cudnn_version.h | cut -d ' ' -f 3 | sed -z 's/\n//' | sed -z 's/\n/./g') | sed 's/.(CUDNN_MAJOR.//'" >> ~/.bashrc
 RUN echo "    echo -e '\x1b[0;32m' && nvidia-smi -L && echo -e '\x1b[0m'" >> ~/.bashrc
+RUN echo "else" >> ~/.bashrc
+RUN echo "echo -e -n '\n'" >> ~/.bashrc
 RUN echo "fi" >> ~/.bashrc
 
 # Clean the cache
