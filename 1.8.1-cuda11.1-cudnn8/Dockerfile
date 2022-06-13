@@ -28,6 +28,7 @@ RUN apt update \
     && apt install -y \
         tzdata \
         beep \
+        wget \
         git \
         ca-certificates \
         apt-transport-https
