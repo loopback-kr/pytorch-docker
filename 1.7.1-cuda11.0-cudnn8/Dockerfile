@@ -22,8 +22,11 @@ RUN sed -i 's/    xterm-color) color_prompt=yes;;/    #xterm-color) color_prompt
 RUN sed -i 's/    PS1=\x27${debian_chroot:+(\$debian_chroot)}\\\[\\033\[01;32m\\\]\\u@\\h\\\[\\033\[00m\\\]:\\\[\\033\[01;34m\\\]\\w\\\[\\033\[00m\\\]\\\$ \x27/    PS1=\x27\${debian_chroot:+(\$debian_chroot)}\\\[\\033\[01;31m\\\]\\u@\\h\\\[\\033\[00m\\\]:\\\[\\033\[01;34m\\\]\\w\\\[\\033\[00m\\\]\\\$ \x27/' /root/.bashrc
 # Update PubKey
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys A4B469963BF863CC
+# Change Ubuntu repository address to Kakao server in Republic of Korea
+RUN sed -i 's/^deb http:\/\/archive.ubuntu.com/deb http:\/\/mirror.kakao.com/g' /etc/apt/sources.list
+RUN sed -i 's/^deb http:\/\/security.ubuntu.com/deb http:\/\/mirror.kakao.com/g' /etc/apt/sources.list
 
-# Install essential packages
+# Install requirement packages
 RUN apt update \
     && apt install -y \
         tzdata \
@@ -31,16 +34,8 @@ RUN apt update \
         wget \
         git \
         ca-certificates \
-        apt-transport-https
-# Change Ubuntu repository address to Kakao server in Republic of Korea
-RUN sed -i 's/^deb http:\/\/archive.ubuntu.com/deb http:\/\/mirror.kakao.com/g' /etc/apt/sources.list
-RUN sed -i 's/^deb http:\/\/security.ubuntu.com/deb http:\/\/mirror.kakao.com/g' /etc/apt/sources.list
-
-
-### Setup requirements
-# Install pytorch requirements
-RUN apt update \
-    && apt install -y \
+        apt-transport-https \
+# Install X11 requirements
         libglu1-mesa-dev \
         libglib2.0-0 \
         libsm6 \
@@ -84,6 +79,6 @@ RUN echo "fi" >> ~/.bashrc
 # Clean the cache
 RUN apt clean \
     && rm -rf /var/lib/apt/lists/* \
-    && pip3 cache purge
+    && pip cache purge
 # Set workspace
 WORKDIR /root/workspace
