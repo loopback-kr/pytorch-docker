@@ -1,4 +1,4 @@
-FROM pytorch/pytorch:1.7.1-cuda11.0-cudnn8-devel
+FROM pytorch/pytorch:1.7.0-cuda11.0-cudnn8-devel
 
 
 ### Set environment variables
@@ -54,7 +54,8 @@ RUN mkdir -p ~/.config/pip \
 "index-url=https://mirror.kakao.com/pypi/simple/\n"\
 "trusted-host=mirror.kakao.com\n"\
         > ~/.config/pip/pip.conf \
-    && pip install -U pip
+    && pip install -U pip \
+    && pip install torchvision==0.9.1
 
 ### Postprocessing & Cleaning
 # Add Bash alias

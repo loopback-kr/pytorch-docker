@@ -54,8 +54,7 @@ RUN mkdir -p ~/.config/pip \
 "index-url=https://mirror.kakao.com/pypi/simple/\n"\
 "trusted-host=mirror.kakao.com\n"\
         > ~/.config/pip/pip.conf \
-    && pip install -U pip \
-    && pip install torchvision==0.9.1
+    && pip install -U pip
 
 ### Postprocessing & Cleaning
 # Add Bash alias
