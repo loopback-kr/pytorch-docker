@@ -1,6 +1,6 @@
 # Pytorch for Asia/Seoul region
 
-Container images for pytorch are available in [loopbackkr's DockerHub repository](https://hub.docker.com/r/loopbackkr/pytorch).
+Container images for pytorch are available in [loopbackkr's DockerHub repository](https://hub.docker.com/r/loopbackkr/pytorch). This repository is forked from [docker.io/pytorch/pytorch](https://hub.docker.com/r/pytorch/pytorch/)
 
 ## Quick start
 
