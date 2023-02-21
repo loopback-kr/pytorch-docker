@@ -2,10 +2,10 @@ FROM pytorch/pytorch:1.11.0-cuda11.3-cudnn8-devel
 
 # Change default Shell to bash
 SHELL ["/bin/bash", "-c"]
-ENV PYTHONIOENCODING=UTF-8
 # Set environment variables
 ENV TZ=Asia/Seoul
 ENV PYTHONIOENCODING=UTF-8
+ARG DEBIAN_FRONTEND=noninteractive
 # Enable color shell prompt of bash
 RUN sed -i 's|#force_color_prompt=yes|force_color_prompt=yes|' /root/.bashrc
 RUN sed -i 's|#force_color_prompt=yes|force_color_prompt=yes|' ~/.bashrc
@@ -44,6 +44,7 @@ RUN mkdir -p ~/.config/pip &&\
 # Install additional packages
 RUN apt update -qq &&\
     apt install -qqy \
+        tzdata\
         vim\
         git
 # Clean cache
