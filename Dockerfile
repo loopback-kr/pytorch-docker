@@ -15,7 +15,6 @@ RUN sed -i "s|http://security.ubuntu.com|http://mirror.kakao.com|g" /etc/apt/sou
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys A4B469963BF863CC
 # Add Bash config
 RUN echo -e "\n\n# Bash prompt" >> /etc/bash.bashrc
-RUN echo 'export PS1="\[\e[31m\]tf-docker\[\e[m\] \[\e[33m\]\w\[\e[m\] > "' >> /etc/bash.bashrc
 RUN echo 'force_color_prompt=yes' >> /etc/bash.bashrc
 # Add Bash alias
 RUN echo -e "\n# Alias" >> /etc/bash.bashrc
@@ -60,7 +59,9 @@ RUN apt update -qq &&\
         sudo\
         tzdata\
         vim\
-        git
+        git\
+        libgl1-mesa-glx\
+        libglib2.0-0
 # Clean cache
 RUN apt clean &&\
     rm -rf /var/lib/apt/lists/*
