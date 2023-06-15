@@ -21,4 +21,5 @@ Container images for pytorch are available in [loopbackkr's DockerHub repository
 * Use [kakao mirror](https://mirror.kakao.com/) reposistory for apt and pip
 * Pretty welcome message with version log
 * Colorful bash prompt
-* preinstalled vim, git
+* Set region to Asia/Seoul for local time
+* Preinstalled vim, git, libGL

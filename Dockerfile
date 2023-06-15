@@ -59,7 +59,9 @@ RUN apt update -qq &&\
         sudo\
         tzdata\
         vim\
-        git
+        git\
+        libgl1-mesa-glx\
+        libglib2.0-0
 # Clean cache
 RUN apt clean &&\
     rm -rf /var/lib/apt/lists/*
