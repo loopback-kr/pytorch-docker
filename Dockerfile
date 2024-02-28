@@ -1,4 +1,4 @@
-FROM pytorch/pytorch:2.1.2-cuda12.1-cudnn8-devel
+FROM pytorch/pytorch:2.0.1-cuda11.7-cudnn8-devel
 
 # Change default Shell to bash
 SHELL ["/bin/bash", "-c"]
@@ -59,7 +59,9 @@ RUN apt update -qq &&\
         sudo\
         tzdata\
         vim\
-        git
+        git\
+        libgl1-mesa-glx\
+        libglib2.0-0
 # Clean cache
 RUN apt clean &&\
     rm -rf /var/lib/apt/lists/*
