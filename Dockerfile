@@ -65,3 +65,5 @@ RUN apt update -qq &&\
 # Clean cache
 RUN apt clean &&\
     rm -rf /var/lib/apt/lists/*
+# Install PyTorch aux. packages
+RUN pip install --no-cache-dir pytorch_lightning==2.0.9 lightning==2.0.9 jupyter tensorboard

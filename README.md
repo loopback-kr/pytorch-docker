@@ -22,4 +22,4 @@ Container images for pytorch are available in [loopbackkr's DockerHub repository
 * Pretty welcome message with version log
 * Colorful bash prompt
 * Set region to Asia/Seoul for local time
-* Preinstalled vim, git, libGL
+* Preinstalled vim, git, libGL, lightning, jupyter, tensorboard
