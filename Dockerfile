@@ -1,4 +1,4 @@
-FROM pytorch/pytorch:2.0.1-cuda11.7-cudnn8-devel
+FROM pytorch/pytorch:2.2.2-cuda12.1-cudnn8-devel
 
 # Change default Shell to bash
 SHELL ["/bin/bash", "-c"]
@@ -7,12 +7,12 @@ ENV TZ=Asia/Seoul
 ENV PYTHONIOENCODING=UTF-8
 ARG DEBIAN_FRONTEND=noninteractive
 # Update public key
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys A4B469963BF863CC
+#RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys A4B469963BF863CC
 # Change default prompt color of root to red
 RUN sed -i 's|    PS1=\x27${debian_chroot:+(\$debian_chroot)}\\\[\\033\[01;32m\\\]\\u@\\h\\\[\\033\[00m\\\]:\\\[\\033\[01;34m\\\]\\w\\\[\\033\[00m\\\]\\\$ \x27|    PS1=\x27\${debian_chroot:+(\$debian_chroot)}\\\[\\033\[01;31m\\\]\\u@\\h\\\[\\033\[00m\\\]:\\\[\\033\[01;34m\\\]\\w\\\[\\033\[00m\\\]\\\$ \x27|' /root/.bashrc
 # Change Ubuntu repository address to Kakao mirror
-RUN sed -i "s|http://archive.ubuntu.com|http://mirror.kakao.com|g" /etc/apt/sources.list
-RUN sed -i "s|http://security.ubuntu.com|http://mirror.kakao.com|g" /etc/apt/sources.list
+RUN sed -i "s|http://archive.ubuntu.com|https://mirror.kakao.com|g" /etc/apt/sources.list
+RUN sed -i "s|http://security.ubuntu.com|https://mirror.kakao.com|g" /etc/apt/sources.list
 # Add Bash config
 RUN echo -e "\n\n# Bash prompt" >> /etc/bash.bashrc
 RUN echo 'force_color_prompt=yes' >> /etc/bash.bashrc
@@ -66,4 +66,4 @@ RUN apt update -qq &&\
 RUN apt clean &&\
     rm -rf /var/lib/apt/lists/*
 # Install PyTorch aux. packages
-RUN pip install --no-cache-dir pytorch_lightning==2.0.9 lightning==2.0.9 jupyter tensorboard
+RUN pip install --no-cache-dir pytorch_lightning==2.2.3 lightning==2.2.3 jupyter tensorboard
