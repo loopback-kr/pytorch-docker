@@ -8,17 +8,19 @@ Container images for pytorch are available in [loopbackkr's DockerHub repository
 
 `docker pull loopbackkr/pytorch:latest`
 
-`docker pull loopbackkr/pytorch:2.0.0-cuda11.7-cudnn8-devel`
-
-`docker pull loopbackkr/pytorch:1.11.0-cuda11.3-cudnn8`
+`docker pull loopbackkr/pytorch:2.0.1-cuda11.7-cudnn8-devel`
 
 ### Dockerfiling
 
 `FROM loopbackkr/pytorch:latest`
 
-`FROM loopbackkr/pytorch:2.0.0-cuda11.7-cudnn8-devel`
+`FROM loopbackkr/pytorch:2.0.1-cuda11.7-cudnn8-devel`
 
-`FROM loopbackkr/pytorch:1.11.0-cuda11.3-cudnn8`
+### Build & Push
+
+`docker build -t loopbackkr/pytorch:2.2.2-cuda12.1-cudnn8-devel .`
+
+`docker image push loopbackkr/pytorch:2.2.2-cuda12.1-cudnn8-devel`
 
 ## Features
 
@@ -26,4 +28,4 @@ Container images for pytorch are available in [loopbackkr's DockerHub repository
 * Pretty welcome message with version log
 * Colorful bash prompt
 * Set region to Asia/Seoul for local time
-* Preinstalled vim, git, libGL
+* Preinstalled vim, git, libGL, lightning, jupyter, tensorboard
