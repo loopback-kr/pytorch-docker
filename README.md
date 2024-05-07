@@ -18,9 +18,9 @@ Container images for pytorch are available in [loopbackkr's DockerHub repository
 
 ### Build & Push
 
-`docker build -t loopbackkr/pytorch:2.2.2-cuda12.1-cudnn8-devel .`
+`docker build -t loopbackkr/pytorch:latest .`
 
-`docker image push loopbackkr/pytorch:2.2.2-cuda12.1-cudnn8-devel`
+`docker image push loopbackkr/pytorch:latest`
 
 ## Features
 
